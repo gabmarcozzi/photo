@@ -13,6 +13,13 @@ public class Admin {
 
     private String username;
     private String password;
+    private String role;
+
+    public Admin(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public long getId() {
         return id;
@@ -36,5 +43,13 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
