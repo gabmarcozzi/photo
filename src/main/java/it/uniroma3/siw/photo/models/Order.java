@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Order {
@@ -24,6 +25,7 @@ public class Order {
 	@Column(nullable = false)
 	private String email;
 	
+	@OneToMany
 	private List<Photo> photos;
 
 	
@@ -57,6 +59,16 @@ public class Order {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 	
 }
