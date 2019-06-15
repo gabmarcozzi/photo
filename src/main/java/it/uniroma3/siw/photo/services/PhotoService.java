@@ -1,5 +1,7 @@
 package it.uniroma3.siw.photo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,21 @@ public class PhotoService {
 			throw new ServiceException("Trying to save a null photo.");
 		
 		photoRep.save(photo);
+	}
+
+	/**
+	 * Get a photo from DB
+	 * @param id
+	 */
+	public Photo findById(Long id) {
+		return this.photoRep.findById(id).orElse(null);
+	}
+
+	/**
+	 * Get all the photos
+	 */
+	public List<Photo> findAll() {
+		return  (List<Photo>) this.photoRep.findAll();
 	}
 	
 }
