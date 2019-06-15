@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<body>
+    <div style="height: calc(100vh - 2px); border: 1px solid black">
+        <div style="padding: 15px 10px; height: 19px; border-bottom: 1px solid black; position: relative">
+            <a>SILPHotos</a>
+            <a style="margin-left: 20px" th:href="@{/galleryByPhoto}">Photos</a>
+            <a style="margin-left: 20px" th:href="@{/galleryByAlbum}">Albums</a>
+            <a style="margin-left: 20px" th:href="@{/galleryByPhotographer}">Photographers</a>
+            <form th:action="@{/galleryByPhoto}" method="GET" th:object="photos" style="position: absolute; width: 332px; right: 10px; top: 15px">
+                <input type="text" name="filter" style="height: 16px; width: 250px; border: 1px solid black; padding: 1px;">
+                <button type="submit" style="width: 72px; height: 18px">SEARCH</button>
+            </form>
+        </div>
+        <form th:action="@{/submitForm}" method="POST" th:object="order" style="height: calc(100% - 50px)">
+            <div style="height: calc(100% - 50px); overflow-y: auto">
+                <div th:each="photo : ${photos}" style="height: 100px; width: calc(100% - 10px); border: 1px solid black; margin-top: 5px; margin-left: 5px">
+                    <img th:action="@{/getImage}" method="GET" src="/getImage?id=${photo.getId()}">
+                </div>
+            </div>
+            <div style="height: 49px; border-top: 1px solid black; position: relative">
+                <span style="position: absolute; top: 15px; left: 10px">Selected photos: </span>
+                <span th:text="${order.getPhotos.size()}" style="position: absolute; top: 15px; left: 120px">1</span>
+                <button type="submit" style="height: 15px; position: absolute; right: 10px; top: 17.5px; font-size: 10px">CONTINUE</button>
+            </div>
+        </form>
+        
+    </div>
+</body>
+</html>
