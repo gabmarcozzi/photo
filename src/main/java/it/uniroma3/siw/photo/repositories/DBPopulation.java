@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import it.uniroma3.siw.photo.models.Admin;
@@ -30,12 +31,13 @@ public class DBPopulation implements ApplicationRunner {
 
     private void deleteAll() {
         adminRepository.deleteAll();
-        System.out.println("Cancello tutto");
         phRep.deleteAll();
     }
 
     private void addAll() {
-        Admin admin = new Admin("admin", "admin", "ADMIN");
+        Admin admin = new Admin("admin", "password", "ADMIN");
+        String adminPassword = new BCryptPasswordEncoder().encode(admin.getPassword());
+        admin.setPassword(adminPassword);
 
         Photo p = new Photo();
     	Album a = new Album();
