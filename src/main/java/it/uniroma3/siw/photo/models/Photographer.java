@@ -21,6 +21,15 @@ public class Photographer {
 	
 	@OneToMany(mappedBy = "ph")
 	private List<Album> albums;
+
+	
+	public Photographer(String complete_name) {
+		this.complete_name = complete_name;
+	}
+
+	public Photographer() {
+		
+	}
 	
 	
 	public String getComplete_name() {
