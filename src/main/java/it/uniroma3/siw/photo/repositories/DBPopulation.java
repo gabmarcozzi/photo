@@ -20,7 +20,6 @@ public class DBPopulation implements ApplicationRunner {
     @Autowired
     private AdminRepository adminRepository;
 
-
 	@Autowired
 	private PhotographerRepository phRep;
 
