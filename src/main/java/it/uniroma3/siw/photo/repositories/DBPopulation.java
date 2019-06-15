@@ -16,6 +16,7 @@ import it.uniroma3.siw.photo.models.Photographer;
 
 @Component
 public class DBPopulation implements ApplicationRunner {
+    
     @Autowired
     private AdminRepository adminRepository;
 
