@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Photo {
@@ -16,8 +18,8 @@ public class Photo {
 	@Column(nullable = false)
 	private String name;
 	
-	private Photographer ph;
-	
+	@ManyToOne
+	@JoinColumn
 	private Album album;
 
 	
@@ -35,14 +37,6 @@ public class Photo {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Photographer getPh() {
-		return ph;
-	}
-
-	public void setPh(Photographer ph) {
-		this.ph = ph;
 	}
 
 	public Album getAlbum() {

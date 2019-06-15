@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Album {
@@ -18,10 +21,13 @@ public class Album {
 	@Column(nullable = false)
 	private String name;
 	
+	@ManyToOne
+	@JoinColumn
 	private Photographer ph;
 	
+	@OneToMany(mappedBy = "album")
 	private List<Photo> photos;
-
+	
 	
 	public Long getId() {
 		return id;
