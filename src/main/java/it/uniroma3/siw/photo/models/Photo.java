@@ -22,6 +22,9 @@ public class Photo {
 	@JoinColumn
 	private Album album;
 
+	@Column
+	private byte[] image;
+	
 	
 	public Long getId() {
 		return id;
@@ -45,6 +48,14 @@ public class Photo {
 
 	public void setAlbum(Album album) {
 		this.album = album;
+	}
+	
+	public byte[] getImage() {
+		return image;
+	}
+	
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 	
 }
