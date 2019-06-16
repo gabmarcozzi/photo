@@ -1,30 +1,69 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>Gallery By Photos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/gallery.css}" />
+</head>
+
 <body>
-    <div style="height: calc(100vh - 2px); border: 1px solid black">
-        <div style="padding: 15px 10px; height: 19px; border-bottom: 1px solid black; position: relative">
+
+    <!-- <div style="padding: 15px 10px; height: 19px; border-bottom: 1px solid black; position: relative">
             <a>SILPHotos</a>
             <a style="margin-left: 20px" th:href="@{/galleryByPhotos}">Photos</a>
             <a style="margin-left: 20px" th:href="@{/galleryByAlbum}">Albums</a>
             <a style="margin-left: 20px" th:href="@{/galleryByPhotographer}">Photographers</a>
-            <form th:action="@{/galleryByPhotos}" method="GET" style="position: absolute; width: 332px; right: 10px; top: 15px">
-                <input type="text" th:name="filter" style="height: 16px; width: 250px; border: 1px solid black; padding: 1px;">
+            <form th:action="@{/galleryByPhotos}" method="GET"
+                style="position: absolute; width: 332px; right: 10px; top: 15px">
+                <input type="text" th:name="filter"
+                    style="height: 16px; width: 250px; border: 1px solid black; padding: 1px;">
                 <button type="submit" style="width: 72px; height: 18px">SEARCH</button>
             </form>
+        </div> -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #dedede;">
+        <span class="navbar-brand" style="font-weight: bold; color: #3b5998">SILPHoto</span>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/galleryByPhotos}">Photos <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/galleryByAlbum}">Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/galleryByPhotographer}">Photographers</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/galleryByPhotos}" method="GET">
+                <input class="form-control mr-sm-2" th:name="filter" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-        <form th:action="@{/submitForm}" method="POST" th:object="${order}" style="height: calc(100% - 50px)">
-            <div style="height: calc(100% - 50px); overflow-y: auto">
-                <div th:each="photo : ${photos}" style="height: 300px; width: calc(100% - 10px); border: 1px solid black; margin-top: 5px; margin-left: 5px">
-                    <img style="width: calc(height); height: 100%" th:src="'/getImage?id=' + ${photo.getId()}">
-                </div>
+    </nav>
+    <form th:action="@{/submitForm}" method="POST" th:object="${order}" style="height: calc(100% - 50px)">
+        <div class="container" style="height: calc(100% - 50px)">
+            <div class="photo-container" th:each="photo : ${photos}" style="height: 300px; width: calc(100% - 10px)">
+                <img class="photo" style="width: calc(height); height: 100%"
+                    th:src="'/getImage?id=' + ${photo.getId()}">
             </div>
-            <div style="height: 49px; border-top: 1px solid black; position: relative">
-                <span style="position: absolute; top: 15px; left: 10px">Selected photos: </span>
-                <span th:if="${order.getPhotos()}" th:text="${order.getPhotos().size()}" style="position: absolute; top: 15px; left: 120px">1</span>
-                <button type="submit" style="height: 15px; position: absolute; right: 10px; top: 17.5px; font-size: 10px">CONTINUE</button>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-bottom" style="background-color: #dedede;">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="navbar-item"><span>Photo selected: </span>
+                    </li>
+                    <li class="nav-item">
+                        <span th:if="${order.getPhotos()}" th:text="${order.getPhotos().size()}"
+                            style="position: absolute; top: 15px; left: 120px">1</span>
+                    </li>
+                </ul>
             </div>
-        </form>
-    </div>
+            <button class="btn btn-continue btn-primary my-2 my-sm-0" type="submit">Continue</button>
+        </nav>
+    </form>
 </body>
+
 </html>
