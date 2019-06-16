@@ -22,7 +22,6 @@
                                     name="username" required autofocus>
                                 <label for="inputUsername">Username</label>
                             </div>
-
                             <div class="form-label-group">
                                 <input type="password" id="inputPassword" class="form-control" placeholder="Password"
                                     name="password" required>
@@ -31,11 +30,15 @@
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
                                 value="Sign In">Sign in</button>
                             <a class="nav-link text-center" th:href="@{/galleryByPhotos}">Enter as a guest</a>
-                            <hr class="my-4">
+                            <div class="container text-center" th:if="${param.error}">
+                                <hr class="my-4">
+                                <label>Invalid username and password</label>
+                            </div>
+                            <!-- <hr class="my-4">
                             <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
                                 <i class="fab fa-google mr-2"></i> Sign in with Google</button>
                             <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit">
-                                <i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                                <i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
                         </form>
                     </div>
                 </div>
