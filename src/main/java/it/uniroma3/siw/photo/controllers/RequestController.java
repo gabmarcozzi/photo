@@ -32,7 +32,7 @@ public class RequestController {
 
     @RequestMapping(value = "/getImage", method = RequestMethod.GET)
     public void showImage(@RequestParam("id") Long id, HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
-        Photo photo = photoService.findById(id);        
+        Photo photo = photoService.findById(id);
         response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
         response.getOutputStream().write(photo.getImage());
         response.getOutputStream().close();

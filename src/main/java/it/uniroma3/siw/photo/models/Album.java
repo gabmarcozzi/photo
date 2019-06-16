@@ -2,6 +2,7 @@ package it.uniroma3.siw.photo.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Album {
 	@JoinColumn
 	private Photographer ph;
 	
-	@OneToMany(mappedBy = "album")
+	@OneToMany(mappedBy = "album", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<Photo> photos;
 	
 	

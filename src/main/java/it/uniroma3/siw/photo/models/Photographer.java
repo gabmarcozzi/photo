@@ -2,6 +2,7 @@ package it.uniroma3.siw.photo.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Photographer {
 	@Column(nullable = false)
 	private String complete_name;
 	
-	@OneToMany(mappedBy = "ph")
+	@OneToMany(mappedBy = "ph", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<Album> albums;
 
 	
