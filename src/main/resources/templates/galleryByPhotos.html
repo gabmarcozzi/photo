@@ -15,8 +15,8 @@
         </div>
         <form th:action="@{/submitForm}" method="POST" th:object="${order}" style="height: calc(100% - 50px)">
             <div style="height: calc(100% - 50px); overflow-y: auto">
-                <div th:each="photo : ${photos}" style="height: 100px; width: calc(100% - 10px); border: 1px solid black; margin-top: 5px; margin-left: 5px">
-                    <img src="/getImage?id=${photo.getId()}">
+                <div th:each="photo : ${photos}" style="height: 300px; width: calc(100% - 10px); border: 1px solid black; margin-top: 5px; margin-left: 5px">
+                    <img style="width: calc(height); height: 100%" th:src="'/getImage?id=' + ${photo.getId()}">
                 </div>
             </div>
             <div style="height: 49px; border-top: 1px solid black; position: relative">

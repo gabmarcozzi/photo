@@ -1,9 +1,11 @@
 package it.uniroma3.siw.photo.repositories;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -41,7 +43,7 @@ public class DBPopulation implements ApplicationRunner {
 		phRep.deleteAll();
 	}
 
-	private void addAll() {
+	private void addAll() throws Exception {
 		Admin admin = new Admin("admin", "password", "ADMIN");
 		String adminPassword = new BCryptPasswordEncoder().encode(admin.getPassword());
 		admin.setPassword(adminPassword);
@@ -56,16 +58,15 @@ public class DBPopulation implements ApplicationRunner {
 		p.setName("Photo 1");
 		p.setAlbum(a);
 		p.setImage(null);
-
-		try {
-			BufferedImage bImage;
-			bImage = ImageIO.read(new File(ImagesDir.class.getResource("image1.jpeg").getPath()));
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			ImageIO.write(bImage, "jpg", bos );
-			p.setImage(bos.toByteArray());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		File file = new File(ImagesDir.class.getResource("image1.jpeg").toURI());
+		FileInputStream fis = new FileInputStream(file);
+		InputStream is = new BufferedInputStream(fis);
+		BufferedImage bImage;
+		bImage = ImageIO.read(is);
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ImageIO.write(bImage, "jpg", bos );
+		p.setImage(bos.toByteArray());
 
 		a.setName("Album 1");
 		a.setPh(usr1);
