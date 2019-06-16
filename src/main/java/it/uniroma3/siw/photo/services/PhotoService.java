@@ -1,6 +1,5 @@
 package it.uniroma3.siw.photo.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +41,14 @@ public class PhotoService {
 	 * Get all the photos
 	 */
 	public List<Photo> findAll() {
-		List<Photo> listPhoto = (List<Photo>) this.photoRep.findAll();
-		if(listPhoto != null) {
-			return listPhoto;
-		}
-		return new ArrayList<Photo>();
+		return (List<Photo>) this.photoRep.findAll();
 	}
-	
+
+	/**
+	 * Get all the photos with the specified name
+	 * @param name
+	 */
+	public List<Photo> findByName(String name) {
+		return (List<Photo>) this.photoRep.findByName(name);
+	}
 }
