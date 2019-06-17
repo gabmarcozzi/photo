@@ -36,6 +36,8 @@ public class Album {
 		this.name = name;
 		this.ph = ph;
 		this.photos = new LinkedList<>();
+		
+		ph.addAlbum(this);
 	}
 	
 	public Album() {
@@ -77,5 +79,7 @@ public class Album {
 	
 	public void addPhoto(Photo pic) {
 		photos.add(pic);
+		
+		pic.setAlbum(this);
 	}
 }

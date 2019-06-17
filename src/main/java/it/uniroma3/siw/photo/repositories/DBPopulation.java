@@ -57,7 +57,6 @@ public class DBPopulation implements ApplicationRunner {
 				// Get his albums
 				for(File f_al : f_ph.listFiles()) {
 					Album al = new Album(f_al.getName(), ph);
-					ph.addAlbum(al);
 					for(File f_pic : f_al.listFiles()) {
 						Photo pic = new Photo(f_pic.getName(), al);
 						BufferedImage bI = ImageIO.read(f_pic);
@@ -65,7 +64,6 @@ public class DBPopulation implements ApplicationRunner {
 						bos.flush();
 						pic.setImage(bos.toByteArray());
 						bos.reset();
-						al.addPhoto(pic);
 					}
 				}
 				phRep.save(ph);

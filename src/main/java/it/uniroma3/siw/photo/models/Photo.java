@@ -34,6 +34,8 @@ public class Photo {
 		super();
 		this.name = name;
 		this.album = album;
+		
+		album.addPhoto(this);
 	}
 
 	

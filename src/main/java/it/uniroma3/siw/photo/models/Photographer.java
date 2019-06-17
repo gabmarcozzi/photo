@@ -61,6 +61,8 @@ public class Photographer {
 	
 	public void addAlbum(Album al) {
 		albums.add(al);
+		
+		al.setPh(this);
 	}
 	
 }
