@@ -1,5 +1,7 @@
 package it.uniroma3.siw.photo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,22 @@ public class PhotographerService {
 		
 		phRep.save(ph);
 	}
+
+	/**
+	 * Get all the photographers
+	 */
+	public List<Photographer> findAll() {
+		return (List<Photographer>) this.phRep.findAll();
+	}
+
+	/**
+	 * Get the photographer with the specified name
+	 * @param name
+	 */
+	public Photographer findByName(String name) {
+		return this.phRep.findByName(name);
+	}
+
+
 	
 }

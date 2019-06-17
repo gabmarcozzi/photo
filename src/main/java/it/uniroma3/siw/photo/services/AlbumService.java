@@ -1,5 +1,7 @@
 package it.uniroma3.siw.photo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,21 @@ public class AlbumService {
 			throw new ServiceException("Trying to save a null album.");
 		
 		alRep.save(album);
+	}
+
+	/**
+	 * Get the album with the specified name
+	 * @param name
+	 */
+	public Album findByName(String name) {
+		return this.alRep.findByName(name);
+	}
+
+	/**
+	 * Get all the albums
+	 */
+	public List<Album> findAll() {
+		return (List<Album>) this.alRep.findAll();
 	}
 	
 }

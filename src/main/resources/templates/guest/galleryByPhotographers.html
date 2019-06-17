@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>Gallery By Photos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/gallery.css}" />
+</head>
+
+<body>
+
+    <!-- <div style="padding: 15px 10px; height: 19px; border-bottom: 1px solid black; position: relative">
+            <a>SILPHotos</a>
+            <a style="margin-left: 20px" th:href="@{/galleryByPhotos}">Photos</a>
+            <a style="margin-left: 20px" th:href="@{/galleryByAlbum}">Albums</a>
+            <a style="margin-left: 20px" th:href="@{/galleryByPhotographer}">Photographers</a>
+            <form th:action="@{/galleryByPhotos}" method="GET"
+                style="position: absolute; width: 332px; right: 10px; top: 15px">
+                <input type="text" th:name="filter"
+                    style="height: 16px; width: 250px; border: 1px solid black; padding: 1px;">
+                <button type="submit" style="width: 72px; height: 18px">SEARCH</button>
+            </form>
+        </div> -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #dedede;">
+        <span class="navbar-brand" style="font-weight: bold; color: #3b5998">SILPHoto</span>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/galleryByPhotos}">Photos <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/galleryByAlbums}">Albums</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/galleryByPhotographers}">Photographers</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/galleryByPhotos}" method="GET">
+                <input class="form-control mr-sm-2" th:name="filter" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <ul style="margin-top: 60px">
+        <li th:each="photographer : ${photographers}">
+            Photographer Name: <a th:text="${photographer.getName()}" th:href="@{/galleryByPhotos(photographerName=${photographer.getName()})}"></a>
+        </li>
+    </ul>
+</body>
+
+</html>

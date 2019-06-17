@@ -19,14 +19,14 @@ public class Photographer {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String complete_name;
+	private String name;
 	
 	@OneToMany(mappedBy = "ph", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<Album> albums;
 
 	
-	public Photographer(String complete_name) {
-		this.complete_name = complete_name;
+	public Photographer(String name) {
+		this.name = name;
 		this.albums = new LinkedList<>();
 	}
 
@@ -35,12 +35,12 @@ public class Photographer {
 	}
 	
 	
-	public String getComplete_name() {
-		return complete_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setComplete_name(String complete_name) {
-		this.complete_name = complete_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -63,6 +63,14 @@ public class Photographer {
 		albums.add(al);
 		
 		al.setPh(this);
+	}
+
+	public List<Photo> getPhotos() {
+		List<Photo> photos = new LinkedList<Photo>();
+		for (Album album : this.getAlbums()) {
+			photos.addAll(album.getPhotos());
+		}
+		return photos;
 	}
 	
 }

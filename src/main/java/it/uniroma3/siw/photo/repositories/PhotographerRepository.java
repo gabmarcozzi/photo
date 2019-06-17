@@ -8,4 +8,6 @@ import it.uniroma3.siw.photo.models.Photographer;
 @Repository
 public interface PhotographerRepository extends CrudRepository<Photographer, Long> {
 
+    public Photographer findByName(String name);
+
 }
