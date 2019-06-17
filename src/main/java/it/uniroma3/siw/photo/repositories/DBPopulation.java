@@ -1,9 +1,14 @@
 package it.uniroma3.siw.photo.repositories;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -58,12 +63,17 @@ public class DBPopulation implements ApplicationRunner {
 		p.setImage(null);
 
 		try {
-			BufferedImage bImage;
-			bImage = ImageIO.read(new File(ImagesDir.class.getResource("image1.jpeg").getPath()));
+			URI uri = ImagesDir.class.getResource("image1.jpeg").toURI();
+			InputStream is = new BufferedInputStream(new FileInputStream(new File(uri)));
+			BufferedImage bImage = ImageIO.read(is);
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			ImageIO.write(bImage, "jpg", bos );
+			ImageIO.write(bImage, "jpg", bos);
 			p.setImage(bos.toByteArray());
+			System.out.println("STRINGA: " + p.getImage());
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
