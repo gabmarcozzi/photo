@@ -9,9 +9,21 @@ body {
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
     background-color: white;
     margin-top: 90px;
+    margin-bottom: 100p
 }
 
 .photo {
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
+}
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
 }
