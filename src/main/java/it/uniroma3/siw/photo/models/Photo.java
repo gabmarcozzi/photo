@@ -26,6 +26,17 @@ public class Photo {
 	private byte[] image;
 	
 	
+	public Photo() {
+
+	}
+	
+	public Photo(String name, Album album) {
+		super();
+		this.name = name;
+		this.album = album;
+	}
+
+	
 	public Long getId() {
 		return id;
 	}

@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -18,8 +16,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
-import it.uniroma3.siw.photo.images.ImagesDir;
 import it.uniroma3.siw.photo.models.Admin;
 import it.uniroma3.siw.photo.models.Album;
 import it.uniroma3.siw.photo.models.Photo;
@@ -51,41 +49,36 @@ public class DBPopulation implements ApplicationRunner {
 		String adminPassword = new BCryptPasswordEncoder().encode(admin.getPassword());
 		admin.setPassword(adminPassword);
 
-		Photo p = new Photo();
-		Album a = new Album();
-		Photographer usr1 = new Photographer("Alessio Papi");
-
-		ArrayList<Album> albums = new ArrayList<>();
-		ArrayList<Photo> photos = new ArrayList<>();
-
-		p.setName("Photo 1");
-		p.setAlbum(a);
-		p.setImage(null);
-
+		// DB population -------------------------------------------------------------
+		// template: population/Photographer/Album/Photo.jpeg
 		try {
-			URI uri = ImagesDir.class.getResource("image1.jpeg").toURI();
-			InputStream is = new BufferedInputStream(new FileInputStream(new File(uri)));
-			BufferedImage bImage = ImageIO.read(is);
+			File file = ResourceUtils.getFile("classpath:population");
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			ImageIO.write(bImage, "jpg", bos);
-			p.setImage(bos.toByteArray());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+			// Get every photographer
+			for(File f_ph : file.listFiles()) {
+				Photographer ph = new Photographer(f_ph.getName());
+				// Get his albums
+				for(File f_al : f_ph.listFiles()) {
+					Album al = new Album(f_al.getName(), ph);
+					ph.addAlbum(al);
+					for(File f_pic : f_al.listFiles()) {
+						Photo pic = new Photo(f_pic.getName(), al);
+						BufferedImage bI = ImageIO.read(f_pic);
+						ImageIO.write(bI, "jpeg", bos);
+						bos.flush();
+						pic.setImage(bos.toByteArray());
+						bos.reset();
+						al.addPhoto(pic);
+					}
+				}
+				phRep.save(ph);
+			}
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		a.setName("Album 1");
-		a.setPh(usr1);
-		a.setPhotos(photos);
-
-		usr1.setAlbums(albums);
-
-		albums.add(a);
-		photos.add(p);
-
-		phRep.save(usr1);
+		// ----------------------------------------------------------------------------
+		
 		adminRepository.save(admin);
 	}
 }

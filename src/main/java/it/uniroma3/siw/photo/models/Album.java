@@ -1,5 +1,6 @@
 package it.uniroma3.siw.photo.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,6 +31,18 @@ public class Album {
 	private List<Photo> photos;
 	
 	
+	public Album(String name, Photographer ph) {
+		super();
+		this.name = name;
+		this.ph = ph;
+		this.photos = new LinkedList<>();
+	}
+	
+	public Album() {
+		this.photos = new LinkedList<>();
+	}
+	
+
 	public Long getId() {
 		return id;
 	}
@@ -62,4 +75,7 @@ public class Album {
 		this.photos = photos;
 	}
 	
+	public void addPhoto(Photo pic) {
+		photos.add(pic);
+	}
 }
