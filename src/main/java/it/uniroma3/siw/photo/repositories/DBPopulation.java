@@ -1,13 +1,10 @@
 package it.uniroma3.siw.photo.repositories;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -49,7 +46,7 @@ public class DBPopulation implements ApplicationRunner {
 		String adminPassword = new BCryptPasswordEncoder().encode(admin.getPassword());
 		admin.setPassword(adminPassword);
 
-		// DB population -------------------------------------------------------------
+		// DB population -----------------------------------------------------------------------------
 		// template: population/Photographer/Album/Photo.jpeg
 		try {
 			File file = ResourceUtils.getFile("classpath:population");
@@ -74,11 +71,14 @@ public class DBPopulation implements ApplicationRunner {
 				phRep.save(ph);
 			}
 		} 
-		catch (Exception e) {
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// ----------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------
 		
 		adminRepository.save(admin);
 	}
+	
 }

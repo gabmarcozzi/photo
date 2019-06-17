@@ -19,10 +19,10 @@ public class GalleryController {
         if (filter == null) {
             model.addAttribute("photos", this.photoService.findAll());
             model.addAttribute("order", new Order());
-            return "galleryByPhotos.html";
+            return "/guest/galleryByPhotos.html";
         }
         model.addAttribute("photos", this.photoService.findByName(filter));
         model.addAttribute("order", new Order());
-        return "galleryByPhotos.html";
+        return "/guest/galleryByPhotos.html";
     }
 }
