@@ -36,7 +36,7 @@ public class DBPopulation implements ApplicationRunner {
 
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	public void run(ApplicationArguments args) {
 		this.deleteAll();
 		this.addAll();
 	}
@@ -69,7 +69,6 @@ public class DBPopulation implements ApplicationRunner {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			ImageIO.write(bImage, "jpg", bos);
 			p.setImage(bos.toByteArray());
-			System.out.println("STRINGA: " + p.getImage());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
