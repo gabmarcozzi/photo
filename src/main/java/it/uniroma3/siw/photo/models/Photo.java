@@ -15,7 +15,11 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
+	/**
+	 * Photo's name.
+	 * @err two photos in the same album can't have the same name
+	 */
+	@Column(nullable = false, unique = true)
 	private String name;
 	
 	@ManyToOne

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
@@ -7,33 +7,33 @@
 </head>
 <body>
 
-	<form th:action="@{/admin/submitPhotoForm}" method="POST" enctype="multipart/form-data"> 
+	<form th:action="@{/admin/submitPhotoForm}" method="POST" enctype="multipart/form-data" th:object="${upf}"> 
         
-        <div th:object="${photographer}">
-        	Complete name photographer: 
-        	<input type="text" name="ph_name"/>
-<!--         	<div th:if="${#fields.hasErrors('photographer_name')}" th:errors="*{photographer_name}"></div> -->
-        </div>
-        
-        <div th:object="${album}">
-        	Album's name: 
-        	<input type="text" name="al_name"/>
-<!--         	<div th:if="${#fields.hasErrors('album_name')}" th:errors="*{album_name}"></div> -->
-        </div>
-        
-        <div th:object="${photo}">
-        	Photo's name: 
-        	<input type="text" name="photo_name"/>
-<!--         	<div th:if="${#fields.hasErrors('photo_name')}" th:errors="*{photo_name}"></div> -->
-        </div>
-        
-        <div>
-        	Image:
-        	<input type="file" name="file"/>
-        </div>
-        
+        <ul>
+        	<li>
+	        	Complete photographer's name: 
+	        	<input type="text" th:field="*{photographerName}"/>
+		        <span th:if="${#fields.hasErrors('photographerName')}" th:errors="*{photographerName}"></span>
+	        </li>
+	        
+	        <li>
+	        	Album's name: 
+	        	<input type="text" th:field="*{albumName}"/>
+	        	<span th:if="${#fields.hasErrors('albumName')}" th:errors="*{albumName}"></span>
+	        </li>
+	        
+	        <li>
+	        	Photo's name: 
+	        	<input type="text" th:field="*{photoName}"/>
+	        	<span th:if="${#fields.hasErrors('photoName')}" th:errors="*{photoName}"></span>
+	        </li>
+	        
+	        <li>
+	        	Upload image:
+	        	<input type="file" name="file"/>
+	        </li>
+        </ul>
         <br>
-        
         <div>
         	<input type="submit" value="Submit" />
         </div>

@@ -18,10 +18,13 @@ public class Photographer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
+	/**
+	 * Complete name for the photographer.
+	 */
+	@Column(nullable = false, unique = true)
 	private String name;
 	
-	@OneToMany(mappedBy = "ph", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	@OneToMany(mappedBy = "ph", cascade = CascadeType.ALL)
 	private List<Album> albums;
 
 	

@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.photo.exceptions.ServiceException;
 import it.uniroma3.siw.photo.models.Photo;
 import it.uniroma3.siw.photo.repositories.PhotoRepository;
 
 @Service
+@Transactional
 public class PhotoService {
 
 	@Autowired
@@ -48,7 +50,16 @@ public class PhotoService {
 	 * Get all the photos with the specified name
 	 * @param name
 	 */
-	public List<Photo> findByName(String name) {
-		return (List<Photo>) this.photoRep.findByName(name);
+	public Photo findByName(String name) {
+		return this.photoRep.findByName(name);
+	}
+
+	/**
+	 * Returns whether a photo with the given name exists in the system.
+	 * @param name
+	 */
+	public boolean existsByName(String name) throws ServiceException {
+		if(name == null) throw new ServiceException("PhotoService.existsByName: null name");
+		return photoRep.existsByName(name);
 	}
 }

@@ -20,14 +20,14 @@ public class Album {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 	
 	@ManyToOne
 	@JoinColumn
 	private Photographer ph;
 	
-	@OneToMany(mappedBy = "album", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	@OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
 	private List<Photo> photos;
 	
 	
@@ -81,5 +81,15 @@ public class Album {
 		photos.add(pic);
 		
 		pic.setAlbum(this);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		// Different classes
+		if(!obj.getClass().equals(Album.class)) return false;
+		
+		Album other = (Album) obj;
+		return name == other.name;
 	}
 }

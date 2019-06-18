@@ -9,4 +9,7 @@ import it.uniroma3.siw.photo.models.Album;
 public interface AlbumRepository extends CrudRepository<Album, Long> {
 
     public Album findByName(String name);
+    
+    public boolean existsByName(String name);
+    
 }

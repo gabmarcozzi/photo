@@ -10,4 +10,6 @@ public interface PhotographerRepository extends CrudRepository<Photographer, Lon
 
     public Photographer findByName(String name);
 
+    public boolean existsByName(String name);
+    
 }
