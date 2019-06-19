@@ -103,7 +103,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 
-		return "admin/home.html";
+		return "admin/success.html";
 	}
 
 	@GetMapping(value = "/admin/galleryByPhotos")

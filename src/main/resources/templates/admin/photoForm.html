@@ -16,6 +16,9 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin}">Home</span></a>
+                </li>
+				<li class="nav-item">
 					<a class="nav-link active" th:href="@{/admin/uploadRequest}">Insert photo <span
 							class="sr-only">(current)</span></a>
 				</li>
@@ -50,19 +53,19 @@
 			<li>
 				Complete photographer's name:
 				<input type="text" th:field="*{photographerName}" />
-				<span th:if="${#fields.hasErrors('photographerName')}" th:errors="*{photographerName}"></span>
+				<span th:if="${#fields.hasErrors('photographerName')}" th:errors="*{photographerName}" style="color:#ff0000"></span>
 	        </li>
 	        
 	        <li>
 	        	Album's name: 
 	        	<input type="text" th:field="*{albumName}"/>
-	        	<span th:if="${#fields.hasErrors('albumName')}" th:errors="*{albumName}"></span>
+	        	<span th:if="${#fields.hasErrors('albumName')}" th:errors="*{albumName}" style="color:#ff0000"></span>
 	        </li>
 	        
 	        <li>
 	        	Photo's name: 
 	        	<input type="text" th:field="*{photoName}"/>
-	        	<span th:if="${#fields.hasErrors('photoName')}" th:errors="*{photoName}"></span>
+	        	<span th:if="${#fields.hasErrors('photoName')}" th:errors="*{photoName}" style="color:#ff0000"></span>
 	        </li>
 	        
 	        <li>
