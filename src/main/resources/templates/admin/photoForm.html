@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Form</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/gallery.css}" />
+	<meta charset="UTF-8">
+	<title>Form</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/gallery.css}" />
 </head>
+
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #dedede;">
@@ -15,7 +16,8 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link active" th:href="@{/admin/uploadRequest}">Insert photo <span class="sr-only">(current)</span></a>
+					<a class="nav-link active" th:href="@{/admin/uploadRequest}">Insert photo <span
+							class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/admin/galleryByPhotos}">Photos</span></a>
@@ -30,16 +32,25 @@
 					<a class="nav-link" th:href="@{/admin/orders}">Orders</a>
 				</li>
 			</ul>
+			<div class="nav-item">
+				<a class="nav-link" th:href="@{/}">Guest mode</a>
+			</div>
+			<div class="nav-item">
+				<form th:action="@{/logout}" method="POST">
+					<button type="submit" class="btn btn-outline-primary">Logout</button>
+				</form>
+			</div>
 		</div>
 	</nav>
 
-	<form style="margin-top: 60px; margin-left: 16px;" th:action="@{/admin/submitPhotoForm}" method="POST" enctype="multipart/form-data" th:object="${upf}"> 
-        
-        <ul>
-        	<li>
-	        	Complete photographer's name: 
-	        	<input type="text" th:field="*{photographerName}"/>
-		        <span th:if="${#fields.hasErrors('photographerName')}" th:errors="*{photographerName}"></span>
+	<form style="margin-top: 60px; margin-left: 16px;" th:action="@{/admin/submitPhotoForm}" method="POST"
+		enctype="multipart/form-data" th:object="${upf}">
+
+		<ul>
+			<li>
+				Complete photographer's name:
+				<input type="text" th:field="*{photographerName}" />
+				<span th:if="${#fields.hasErrors('photographerName')}" th:errors="*{photographerName}"></span>
 	        </li>
 	        
 	        <li>

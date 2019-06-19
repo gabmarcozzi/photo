@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <title>Pagina visibile solo all'admin</title>
@@ -32,6 +31,14 @@
                     <a class="nav-link" th:href="@{/admin/orders}">Orders</a>
                 </li>
             </ul>
+            <div class="nav-item">
+                <a class="nav-link" th:href="@{/}">Guest mode</a>
+            </div>
+            <div class="nav-item">
+                <form th:action="@{/logout}" method="POST">
+                    <button type="submit" class="btn btn-outline-primary">Logout</button>
+                </form>
+            </div>
         </div>
     </nav>
 
@@ -46,7 +53,7 @@
             <li>View all the orders</li>
         </ul>
     </div>
-    
+
 </body>
 
 </html>

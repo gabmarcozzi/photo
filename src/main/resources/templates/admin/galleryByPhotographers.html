@@ -23,18 +23,28 @@
                     <a class="nav-link" th:href="@{/admin/galleryByAlbums}">Albums</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/admin/galleryByPhotographers}">Photographers <span class="sr-only">(current)</a>
+                    <a class="nav-link" th:href="@{/admin/galleryByPhotographers}">Photographers <span
+                            class="sr-only">(current)</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/admin/orders}">Orders</a>
                 </li>
             </ul>
+            <div class="nav-item">
+                <a class="nav-link" th:href="@{/}">Guest mode</a>
+            </div>
+            <div class="nav-item">
+                <form th:action="@{/logout}" method="POST">
+                    <button type="submit" class="btn btn-outline-primary">Logout</button>
+                </form>
+            </div>
         </div>
     </nav>
 
     <ul style="margin-top: 60px">
         <li th:each="photographer : ${photographers}">
-            Photographer Name: <a th:text="${photographer.getName()}" th:href="@{/admin/galleryByPhotos(photographerName=${photographer.getName()})}"></a>
+            Photographer Name: <a th:text="${photographer.getName()}"
+                th:href="@{/admin/galleryByPhotos(photographerName=${photographer.getName()})}"></a>
         </li>
     </ul>
 </body>

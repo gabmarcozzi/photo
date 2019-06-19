@@ -35,14 +35,10 @@ public class GalleryController {
             @RequestParam(value = "photographerName", required = false) String photographerName,
             @RequestParam(value = "addedPhotoId", required = false) Long addedPhotoId, 
             Model model, HttpSession session) {
-
-        if (session.getAttribute("selectedPhotos") == null) {
-            List<Photo> selectedPhotos = new ArrayList<Photo>();
-            session.setAttribute("selectedPhotos", selectedPhotos);
-        }
         
         @SuppressWarnings("unchecked")
         List<Photo> selectedPhotos = (List<Photo>)session.getAttribute("selectedPhotos");
+        model.addAttribute("photosNumber", selectedPhotos.size());
 
         if (filter != null) {
             model.addAttribute("photos", this.photoService.findByName(filter));
@@ -63,10 +59,9 @@ public class GalleryController {
             if(!find) {
                 selectedPhotos.add(ph);
                 session.setAttribute("selectedPhotos", selectedPhotos);
+                model.addAttribute("photosNumber", selectedPhotos.size());
             }
         }
-
-        model.addAttribute("photosNumber", selectedPhotos.size());
         model.addAttribute("photos", this.photoService.findAll());
         return "/guest/galleryByPhotos.html";
     }
@@ -83,9 +78,13 @@ public class GalleryController {
         return "/guest/galleryByPhotographers.html";
     }
 
-    @RequestMapping(value = {"/login"})
-    public String login(HttpSession session) {
-        session.setAttribute("selectedPhotos", null);
-        return "login.html";
+    @RequestMapping(value = "/")
+    public String index(Model model, HttpSession session) {
+        List<Photo> selectedPhotos = new ArrayList<Photo>();
+        session.setAttribute("selectedPhotos", selectedPhotos);
+
+        model.addAttribute("photosNumber", 0);
+        model.addAttribute("photos", this.photoService.findAll());
+        return "/guest/galleryByPhotos.html";
     }
 }
