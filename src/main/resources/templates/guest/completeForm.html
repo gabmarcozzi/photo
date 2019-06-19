@@ -9,29 +9,30 @@
 </head>
 
 <body>
-	<form th:action="@{/checkRequest}" method="POST" th:object="${order}">
-		<div class="form-group">
-			<label for="name">Name</label>
-			<input type="text" class="form-control" id="name" placeholder="Scrivi" th:field="*{name}">
-			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:#ff0000"></span>
-		</div>
-		<div class="form-group">
-			<label for="surname">Surname</label>
-			<input type="text" class="form-control" id="surname" placeholder="Scrivi" th:field="*{surname}">
-			<span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" style="color:#ff0000"></span>
-		</div>
-		<div class="form-group">
-			<label for="email">Email</label>
-			<input type="email" class="form-control" id="email" placeholder="Scrivi" th:field="*{email}">
-			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:#ff0000"></span>
-		</div>
-		<h4>Summary</h4>
-		<div class="row m-0">
-			<div class="col-3"></div>
-			<div class="col-6">
+	<div class="row m-0">
+		<div class="col-3"></div>
+		<div class="col-6">
+			<form th:action="@{/checkRequest}" method="POST" th:object="${order}" style="margin-top: 50px">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" id="name" placeholder="Scrivi" th:field="*{name}">
+					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:#ff0000"></span>
+				</div>
+				<div class="form-group">
+					<label for="surname">Surname</label>
+					<input type="text" class="form-control" id="surname" placeholder="Scrivi" th:field="*{surname}">
+					<span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" style="color:#ff0000"></span>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" placeholder="Scrivi" th:field="*{email}">
+					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:#ff0000"></span>
+				</div>
+				<button type="submit" class="btn btn-primary" style="margin-bottom: 30px">Send request</button>
+				<h4>Summary</h4>
 				<div class="container" style="height: calc(100% - 50px); margin-bottom: 30px">
 					<div class="photo-container" th:each="photo : ${order.photos}"
-						style="height: 300px; width: calc(100% - 10px)">
+						style="height: 300px; width: calc(100% - 10px); margin-top: 30px">
 						<div class="row">
 							<div class="col-6">
 								<img class="photo" style=" height: 300px; width: inherit"
@@ -48,11 +49,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-3"></div>
+			</form>
 		</div>
-		<button type="submit" class="btn btn-primary">Send request</button>
-	</form>
+		<div class="col-3"></div>
+	</div>
+	
 
 </body>
 
