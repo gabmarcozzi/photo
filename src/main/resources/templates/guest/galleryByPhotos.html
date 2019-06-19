@@ -64,7 +64,9 @@
                             <p style="padding-left: 20px" th:text="${photo.album.name}"></p>
                         </div>
                         <div class="col-1 p-0" style="margin-top: 140px">
-                            <a th:href="@{/galleryByPhotos/(addedPhotoId=${photo.id})}" text="Add">Add</a>
+                            <a th:href="@{/galleryByPhotos/(addedPhotoId=${photo.id})}">Add
+                                <!-- <img th:src="../../assets/add_button.png" /> -->
+                            </a>
                         </div>
                     </div>
                 </div>
