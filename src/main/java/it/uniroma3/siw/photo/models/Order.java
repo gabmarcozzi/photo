@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity(name = "orders")
 public class Order {
@@ -25,9 +25,8 @@ public class Order {
 	@Column(nullable = false)
 	private String email;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Photo> photos;
-
 	
 	public Long getId() {
 		return id;

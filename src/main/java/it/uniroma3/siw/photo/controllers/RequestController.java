@@ -56,7 +56,11 @@ public class RequestController {
         orderValidator.validate(order, bindingResult);
         if (!bindingResult.hasErrors()) {
             try {
+                @SuppressWarnings("unchecked")
+                List<Photo> selectedPhotos = (List<Photo>) session.getAttribute("selectedPhotos");
+                order.setPhotos(selectedPhotos);
                 orderService.save(order);
+                model.addAttribute("order", order);
                 return "guest/success.html";
 
             } catch (ServiceException e) { e.printStackTrace(); }

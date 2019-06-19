@@ -83,7 +83,7 @@ public class GalleryController {
         return "/guest/galleryByPhotographers.html";
     }
 
-    @RequestMapping(value = {"/login", "/"})
+    @RequestMapping(value = {"/login"})
     public String login(HttpSession session) {
         session.setAttribute("selectedPhotos", null);
         return "login.html";
