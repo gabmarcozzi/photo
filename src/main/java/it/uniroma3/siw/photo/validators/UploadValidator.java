@@ -6,20 +6,27 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import it.uniroma3.siw.photo.exceptions.ServiceException;
+import it.uniroma3.siw.photo.models.Album;
+import it.uniroma3.siw.photo.models.Photo;
+import it.uniroma3.siw.photo.models.Photographer;
 import it.uniroma3.siw.photo.models.UploadPhotoForm;
 import it.uniroma3.siw.photo.services.AlbumService;
 import it.uniroma3.siw.photo.services.PhotoService;
+import it.uniroma3.siw.photo.services.PhotographerService;
 
 @Component
 public class UploadValidator implements Validator {
-	
+
 	@Autowired
-	private AlbumService as;
-	
+	private PhotoService photoService;
+
 	@Autowired
-	private PhotoService ps;
-	
+	private PhotographerService photographerService;
+
+	@Autowired
+	private AlbumService albumService;
+
+
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return UploadPhotoForm.class.equals(clazz);
@@ -31,16 +38,21 @@ public class UploadValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "albumName", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "photoName", "required");
 		
+		// Syntax errors, return. Otherwise, look for logic errors.
+		if(errors.hasErrors())
+			return;
+
 		UploadPhotoForm upf = (UploadPhotoForm) target;
+
+		Photographer photographer = photographerService.findByName(upf.getPhotographerName());
+		Album album = albumService.findByName(upf.getAlbumName());
+		Photo photo = photoService.findByName(upf.getPhotoName());
 		
-		try {
-			if(ps.existsByName(upf.getPhotoName())) {
-				errors.rejectValue("photoName", "duplicated");
-			}
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		if(album != null && ((photographer != null && !album.getPh().equals(photographer) || photographer == null)))
+			errors.rejectValue("albumName", "wrongalbum");
+		
+		if(photo != null)
+			errors.rejectValue("photoName", "duplicated");
 	}
 
 }

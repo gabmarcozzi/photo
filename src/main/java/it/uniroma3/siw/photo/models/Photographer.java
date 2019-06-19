@@ -17,17 +17,17 @@ public class Photographer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	/**
 	 * Complete name for the photographer.
 	 */
 	@Column(nullable = false, unique = true)
 	private String name;
-	
+
 	@OneToMany(mappedBy = "ph", cascade = CascadeType.ALL)
 	private List<Album> albums;
 
-	
+
 	public Photographer(String name) {
 		this.name = name;
 		this.albums = new LinkedList<>();
@@ -36,8 +36,8 @@ public class Photographer {
 	public Photographer() {
 		this.albums = new LinkedList<>();
 	}
-	
-	
+
+
 	public String getName() {
 		return name;
 	}
@@ -61,10 +61,10 @@ public class Photographer {
 	public void setAlbums(List<Album> albums) {
 		this.albums = albums;
 	}
-	
+
 	public void addAlbum(Album al) {
 		albums.add(al);
-		
+
 		al.setPh(this);
 	}
 
@@ -75,5 +75,15 @@ public class Photographer {
 		}
 		return photos;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+
+		// Different classes
+		if(!obj.getClass().equals(Photographer.class)) return false;
+
+		Photographer other = (Photographer) obj;
+		return name == other.name;
+	}
+
 }

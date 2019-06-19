@@ -1,8 +1,6 @@
 package it.uniroma3.siw.photo.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -19,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.photo.exceptions.ServiceException;
 import it.uniroma3.siw.photo.models.Album;
-import it.uniroma3.siw.photo.models.Order;
 import it.uniroma3.siw.photo.models.Photo;
 import it.uniroma3.siw.photo.models.Photographer;
 import it.uniroma3.siw.photo.models.UploadPhotoForm;
@@ -66,13 +63,15 @@ public class AdminController {
 			BindingResult br,
 			Model model) {
 
+		// Normalize the received input
+		upf.normalize();
+
 		// Validate form's data
 		uv.validate(upf, br);
 
 		// In case of errors, go back to the form's page
-		if(br.hasErrors()) {
+		if(br.hasErrors() || file.isEmpty())
 			return "admin/photoForm.html";
-		}
 
 		try {
 			Photographer photographer = photographerService.findByName(upf.getPhotographerName());
@@ -103,30 +102,12 @@ public class AdminController {
 		catch (ServiceException e) {
 			e.printStackTrace();
 		}
-		
-		//		
-		//		try {
-		//			if(photographerService.existsByName(upf.getPhotographerName())) {
-		//				Photographer photographer = photographerService
-		//				if(albumService.exists(album)) {
-		//					photoService.save(photo);
-		//				}
-		//				else {
-		//					albumService.save(album);
-		//				}
-		//			}
-		//			else {
-		//				photographerService.save(photographer);
-		//			}
-		//		} catch (ServiceException e) {
-		//			e.printStackTrace();
-		//		}
 
 		return "admin/home.html";
 	}
 
 	@GetMapping(value = "/admin/galleryByPhotos")
-    public String galleryByPhotos(
+	public String galleryByPhotos(
 			@RequestParam(value = "albumName", required = false) String albumName,
 			@RequestParam(value = "photographerName", required = false) String photographerName,
 			@RequestParam(value = "orderId", required = false) Long orderId,
@@ -135,27 +116,27 @@ public class AdminController {
 		if (albumName != null) {
 			model.addAttribute("photos", this.albumService.findByName(albumName).getPhotos());
 		} else if (photographerName != null) {
-            model.addAttribute("photos", this.photographerService.findByName(photographerName).getPhotos());
+			model.addAttribute("photos", this.photographerService.findByName(photographerName).getPhotos());
 		} else if (orderId != null) {
 			model.addAttribute("photos", this.orderService.findById(orderId).getPhotos());
 		} else {
 			model.addAttribute("photos", this.photoService.findAll());
 		}
-        return "/admin/galleryByPhotos.html";
+		return "/admin/galleryByPhotos.html";
 	}
-	
+
 	@GetMapping(value = "/admin/galleryByAlbums")
-    public String galleryByAlbums(Model model) {
-        model.addAttribute("albums", this.albumService.findAll());
-        return "/admin/galleryByAlbums.html";
+	public String galleryByAlbums(Model model) {
+		model.addAttribute("albums", this.albumService.findAll());
+		return "/admin/galleryByAlbums.html";
 	}
-	
+
 	@GetMapping(value = "/admin/galleryByPhotographers")
-    public String galleryByPhotographers(Model model) {
-        model.addAttribute("photographers", this.photographerService.findAll());
-        return "/admin/galleryByPhotographers.html";
+	public String galleryByPhotographers(Model model) {
+		model.addAttribute("photographers", this.photographerService.findAll());
+		return "/admin/galleryByPhotographers.html";
 	}
-	
+
 	@GetMapping(value = "/admin/orders")
 	public String orders(Model model) {
 		// List<Order> orders = new ArrayList<Order>();
