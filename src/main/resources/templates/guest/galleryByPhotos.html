@@ -88,7 +88,10 @@
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-continue btn-primary my-2 my-sm-0" type="submit">Continue</button>
+            <div th:switch="${photosNumber}">
+                <div th:case="0"></div>
+                <button th:case="*" class="btn btn-continue btn-primary my-2 my-sm-0" type="submit">Continue</button>
+            </div>
         </nav>
     </form>
 </body>
