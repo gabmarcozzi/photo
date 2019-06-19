@@ -3,11 +3,37 @@
 	xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Form</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/gallery.css}" />
 </head>
 <body>
 
-	<form th:action="@{/admin/submitPhotoForm}" method="POST" enctype="multipart/form-data" th:object="${upf}"> 
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #dedede;">
+		<span class="navbar-brand" style="font-weight: bold; color: #3b5998">SILPHoto</span>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link active" th:href="@{/admin/uploadRequest}">Insert photo <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/admin/galleryByPhotos}">Photos</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/admin/galleryByAlbums}">Albums</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/admin/galleryByPhotographers}">Photographers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/admin/orders}">Orders</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<form style="margin-top: 60px; margin-left: 16px;" th:action="@{/admin/submitPhotoForm}" method="POST" enctype="multipart/form-data" th:object="${upf}"> 
         
         <ul>
         	<li>

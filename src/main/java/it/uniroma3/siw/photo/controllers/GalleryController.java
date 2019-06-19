@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.uniroma3.siw.photo.models.Order;
 import it.uniroma3.siw.photo.models.Photo;
 import it.uniroma3.siw.photo.services.AlbumService;
 import it.uniroma3.siw.photo.services.PhotoService;
@@ -71,7 +71,7 @@ public class GalleryController {
 
         model.addAttribute("photosNumber", selectedPhotos.size());
         model.addAttribute("photos", this.photoService.findAll());
-        //model.addAttribute("order", new Order());
+        // model.addAttribute("order", new Order());
         return "/guest/galleryByPhotos.html";
     }
 
@@ -85,5 +85,11 @@ public class GalleryController {
     public String galleryByPhotographers(Model model) {
         model.addAttribute("photographers", this.photographerService.findAll());
         return "/guest/galleryByPhotographers.html";
+    }
+
+    @RequestMapping(value = {"/login", "/"})
+    public String login(HttpSession session) {
+        session.setAttribute("selectedPhotos", null);
+        return "login.html";
     }
 }

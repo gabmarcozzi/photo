@@ -1,5 +1,7 @@
 package it.uniroma3.siw.photo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,5 +30,19 @@ public class OrderService {
 		
 		orderRep.save(order);
 	}
+
+	/**
+	 * Get all the orders
+	 */
+	public List<Order> findAll() {
+		return (List<Order>) this.orderRep.findAll();
+	}
 	
+	/**
+	 * Get the order with the specified id
+	 * @param id
+	 */
+	public Order findById(Long id) {
+		return this.orderRep.findById(id).orElse(null);
+	}
 }

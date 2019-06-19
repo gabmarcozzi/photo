@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <title>Pagina visibile solo all'admin</title>
-    <meta charset="UTF-8">
+    <title>Gallery By Photos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/gallery.css}" />
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #dedede;">
         <span class="navbar-brand" style="font-weight: bold; color: #3b5998">SILPHoto</span>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -25,8 +22,8 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/admin/galleryByAlbums}">Albums</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/galleryByPhotographers}">Photographers</a>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/admin/galleryByPhotographers}">Photographers <span class="sr-only">(current)</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/admin/orders}">Orders</a>
@@ -35,18 +32,11 @@
         </div>
     </nav>
 
-    <div style="margin-top: 60px; padding-left: 40px">
-        <div>This is the main menu</div>
-        <div>From here you can:</div>
-        <ul>
-            <li>Insert a new photo</li>
-            <li>View all the photos</li>
-            <li>View all the albums</li>
-            <li>View all the photographers</li>
-            <li>View all the orders</li>
-        </ul>
-    </div>
-    
+    <ul style="margin-top: 60px">
+        <li th:each="photographer : ${photographers}">
+            Photographer Name: <a th:text="${photographer.getName()}" th:href="@{/admin/galleryByPhotos(photographerName=${photographer.getName()})}"></a>
+        </li>
+    </ul>
 </body>
 
 </html>
