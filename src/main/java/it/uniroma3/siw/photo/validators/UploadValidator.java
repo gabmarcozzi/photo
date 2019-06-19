@@ -7,8 +7,6 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.photo.exceptions.ServiceException;
-import it.uniroma3.siw.photo.models.Album;
-import it.uniroma3.siw.photo.models.Photo;
 import it.uniroma3.siw.photo.models.UploadPhotoForm;
 import it.uniroma3.siw.photo.services.AlbumService;
 import it.uniroma3.siw.photo.services.PhotoService;

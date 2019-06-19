@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.photo.models.Photo;
@@ -80,5 +81,11 @@ public class GalleryController {
     public String galleryByPhotographers(Model model) {
         model.addAttribute("photographers", this.photographerService.findAll());
         return "/guest/galleryByPhotographers.html";
+    }
+
+    @RequestMapping(value = {"/login", "/"})
+    public String login(HttpSession session) {
+        session.setAttribute("selectedPhotos", null);
+        return "login.html";
     }
 }

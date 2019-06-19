@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/gallery.css}" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #dedede;">
+        <span class="navbar-brand" style="font-weight: bold; color: #3b5998">SILPHoto</span>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/uploadRequest}">Insert photo</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/galleryByPhotos}">Photos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/galleryByAlbums}">Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/galleryByPhotographers}">Photographers</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/orders}">Orders <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="container" style="height: calc(100% - 50px); margin-bottom: 30px">
+                <div class="photo-container" th:each="order : ${orders}"
+                    style="height: auto; width: calc(100% - 10px)">
+                    <div class="row">
+                        <div style="padding-top: 30px; padding-left: 40px;">
+                            <a th:href="@{/admin/galleryByPhotos(orderId=${order.getId()})}">
+                                <span class="h3">Order ID: </span> <span class="h5" th:text="${order.getId()}"></span>
+                            </a>
+                            <div>
+                                <span class="h3">Client name: </span> <span class="h5" th:text="${order.getName()}"></span>
+                            </div>
+                            <div>
+                                <span class="h3">Client surname: </span> <span class="h5" th:text="${order.getSurname()}"></span>
+                            </div>
+                            <div>
+                                <span class="h3">Client email: </span> <span class="h5" th:text="${order.getEmail()}"></span>
+                            </div>
+                            <div style="padding-bottom: 30px">
+                                <span class="h3">N° photo selected: </span> <span class="h5" th:text="${order.getPhotos().size()}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</body>
+
+</html>
