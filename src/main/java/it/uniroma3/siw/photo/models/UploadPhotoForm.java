@@ -42,28 +42,28 @@ public class UploadPhotoForm {
 	 * Normalize encapsulated text. Es: " foto esempio " -> "Foto Esempio" 
 	 */
 	public void normalize() {
-		String[] photographerAux = photographerName.trim().split(" ");
-		String[] albumAux = albumName.trim().split(" ");
-		String[] photoAux = photoName.trim().split(" ");
+		String[] photographerAux = photographerName.split(" ");
+		String[] albumAux = albumName.split(" ");
+		String[] photoAux = photoName.split(" ");
 		
 		photographerName = "";
 		albumName = "";
 		photoName = "";
 		
 		for(String s : photographerAux) {
-			if(s.isBlank())	continue;
+			if(s.trim().isEmpty()) continue;
 			s = s.substring(0, 1).toUpperCase() + s.substring(1);
 			photographerName = photographerName.concat(s + " ");
 		}
 		
 		for(String s : albumAux) {
-			if(s.isBlank())	continue;
+			if(s.trim().isEmpty()) continue;
 			s = s.substring(0, 1).toUpperCase() + s.substring(1);
 			albumName = albumName.concat(s + " ");
 		}
 		
 		for(String s : photoAux) {
-			if(s.isBlank())	continue;
+			if(s.trim().isEmpty()) continue;
 			s = s.substring(0, 1).toUpperCase() + s.substring(1);
 			photoName = photoName.concat(s + " ");
 		}
