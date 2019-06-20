@@ -15,17 +15,17 @@
 			<form th:action="@{/checkRequest}" method="POST" th:object="${order}" style="margin-top: 50px">
 				<div class="form-group">
 					<label for="name">Name</label>
-					<input type="text" class="form-control" id="name" placeholder="Scrivi" th:field="*{name}">
+					<input type="text" class="form-control" id="name" placeholder="Type" th:field="*{name}">
 					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:#ff0000"></span>
 				</div>
 				<div class="form-group">
 					<label for="surname">Surname</label>
-					<input type="text" class="form-control" id="surname" placeholder="Scrivi" th:field="*{surname}">
+					<input type="text" class="form-control" id="surname" placeholder="Type" th:field="*{surname}">
 					<span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" style="color:#ff0000"></span>
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="email" class="form-control" id="email" placeholder="Scrivi" th:field="*{email}">
+					<input type="email" class="form-control" id="email" placeholder="Type" th:field="*{email}">
 					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:#ff0000"></span>
 				</div>
 				<button type="submit" class="btn btn-primary" style="margin-bottom: 30px">Send request</button>

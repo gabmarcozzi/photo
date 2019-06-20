@@ -44,12 +44,35 @@
         </div>
     </nav>
 
-    <ul style="margin-top: 60px">
-        <li th:each="album : ${albums}">
-            Album Name: <a th:text="${album.getName()}"
-                th:href="@{/admin/galleryByPhotos(albumName=${album.getName()})}"></a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="container" style="height: calc(100% - 50px);">
+                <div class="photo-container" th:each="album : ${albums}" style="height: auto; width: calc(100% - 10px)">
+                    <div class="row">
+                        <div style="padding-top: 30px; padding-left: 40px;">
+                            <div>
+                                <span class="h3">Album Id: </span> <span class="h5" th:text="${album.getId()}"></span>
+                            </div>
+                            <a th:href="@{/admin/galleryByPhotos(albumName=${album.getName()})}">
+                                <span class="h3">Album Name: </span> <span class="h5"
+                                    th:text="${album.getName()}"></span>
+                            </a>
+                            <div>
+                                <span class="h3">Photographer Name: </span> <span class="h5"
+                                    th:text="${album.getPh().getName()}"></span>
+                            </div>
+                            <div style="padding-bottom: 30px">
+                                <span class="h3">N° of photos: </span> <span class="h5"
+                                    th:text="${album.getPhotos().size()}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
 </body>
 
 </html>
